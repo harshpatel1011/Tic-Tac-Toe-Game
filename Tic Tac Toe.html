@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe ChatGPT</title>
+    <style>
+        body {
+            background-color: #081830;
+            color: #b3cde0;
+            font-family: Arial, sans-serif;
+        }
+
+        .head {
+            margin: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tic {
+            text-align: center;
+        }
+
+        .row {
+            margin-bottom: 8px;
+        }
+
+        .cell {
+            height: 200px;
+            width: 200px;
+            margin: 8px;
+            background-color: transparent;
+            border: 4px solid #b3cde0;
+            border-radius: 8px;
+            font-size: 80px;
+            font-weight: 700;
+            color: #b3cde0;
+            vertical-align: middle;
+        }
+
+        .cell:hover {
+            background-color: #b3cde0;
+            color: #090c31;
+            cursor: pointer;
+        }
+
+        #display {
+            margin-top: 12px;
+            font-size: 22px;
+        }
+
+        #controls {
+            margin-top: 10px;
+        }
+
+        #resetBtn {
+            padding: 8px 14px;
+            background: #b3cde0;
+            color: #081830;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">
+        <div class="tic">
+            <div class="row">
+                <button class="cell" value="1" onclick="press(this)"></button>
+                <button class="cell" value="2" onclick="press(this)"></button>
+                <button class="cell" value="3" onclick="press(this)"></button>
+            </div>
+            <div class="row">
+                <button class="cell" value="4" onclick="press(this)"></button>
+                <button class="cell" value="5" onclick="press(this)"></button>
+                <button class="cell" value="6" onclick="press(this)"></button>
+            </div>
+            <div class="row">
+                <button class="cell" value="7" onclick="press(this)"></button>
+                <button class="cell" value="8" onclick="press(this)"></button>
+                <button class="cell" value="9" onclick="press(this)"></button>
+            </div>
+
+            <div id="display">Turn: X</div>
+
+            <div id="controls">
+                <button id="resetBtn" onclick="resetGame()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var turn = "X";
+        var moves = 0;
+        var finished = false;
+
+        function press(btn) {
+            if (finished) return;
+            if (btn.innerHTML != "") return;
+
+            btn.innerHTML = turn;
+            moves++;
+
+            if (checkWinner()) {
+                document.getElementById("display").innerHTML = turn + " Wins!";
+                finished = true;
+                disableCells();
+                return;
+            }
+
+            if (moves == 9) {
+                document.getElementById("display").innerHTML = "Draw!";
+                finished = true;
+                return;
+            }
+
+            // Switch turn
+            if (turn == "X") {
+                turn = "O";
+            } else {
+                turn = "X";
+            }
+            document.getElementById("display").innerHTML = "Turn: " + turn;
+        }
+
+        function checkWinner() {
+            // Get all buttons in the page
+            var allButtons = document.getElementsByTagName("button");
+            // The first 9 buttons are the game cells
+            var b = [];
+            for (var i = 0; i < 9; i++) {
+                b[i] = allButtons[i].innerHTML;
+            }
+
+            // Winning conditions
+            if (
+                (b[0] && b[0] == b[1] && b[1] == b[2]) ||
+                (b[3] && b[3] == b[4] && b[4] == b[5]) ||
+                (b[6] && b[6] == b[7] && b[7] == b[8]) ||
+                (b[0] && b[0] == b[3] && b[3] == b[6]) ||
+                (b[1] && b[1] == b[4] && b[4] == b[7]) ||
+                (b[2] && b[2] == b[5] && b[5] == b[8]) ||
+                (b[0] && b[0] == b[4] && b[4] == b[8]) ||
+                (b[2] && b[2] == b[4] && b[4] == b[6])
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function disableCells() {
+            var allButtons = document.getElementsByTagName("button");
+            for (var i = 0; i < 9; i++) {
+                allButtons[i].disabled = true;
+            }
+        }
+
+        function resetGame() {
+            var allButtons = document.getElementsByTagName("button");
+            for (var i = 0; i < 9; i++) {
+                allButtons[i].innerHTML = "";
+                allButtons[i].disabled = false;
+            }
+            turn = "X";
+            moves = 0;
+            finished = false;
+            document.getElementById("display").innerHTML = "Turn: " + turn;
+        }
+    </script>
+</body>
+
+</html>

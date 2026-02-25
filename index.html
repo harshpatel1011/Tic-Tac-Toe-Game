@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe ChatGPT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="head">
+        <div class="tic">
+            <div class="row">
+                <button class="cell" value="1" onclick="press(this)"></button>
+                <button class="cell" value="2" onclick="press(this)"></button>
+                <button class="cell" value="3" onclick="press(this)"></button>
+            </div>
+            <div class="row">
+                <button class="cell" value="4" onclick="press(this)"></button>
+                <button class="cell" value="5" onclick="press(this)"></button>
+                <button class="cell" value="6" onclick="press(this)"></button>
+            </div>
+            <div class="row">
+                <button class="cell" value="7" onclick="press(this)"></button>
+                <button class="cell" value="8" onclick="press(this)"></button>
+                <button class="cell" value="9" onclick="press(this)"></button>
+            </div>
+
+            <div id="display">Turn: X</div>
+
+            <div id="controls">
+                <button id="resetBtn" onclick="resetGame()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
